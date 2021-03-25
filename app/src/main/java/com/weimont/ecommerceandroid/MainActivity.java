@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    //segunda actividad
+    //segunda actividad a mostrar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
