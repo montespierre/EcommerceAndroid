@@ -36,4 +36,14 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Material design: es un lenguaje de diseño en el que predominan animaciones, transiciones y los efectos de profundidad como la iluminación y las sombras.
+    implementation 'com.google.android.material:material:1.1.0'
+
+    // Glide: Loading images with Glide is easy and in many cases requires only a single line:
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    // Glide: Skip this if you don't want to use integration libraries or configure Glide.
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    // Animatoo is a lightweight and easy to use Android library that provides many activity transition animations
+    implementation 'com.github.mohammadatif:Animatoo:master'
 }
