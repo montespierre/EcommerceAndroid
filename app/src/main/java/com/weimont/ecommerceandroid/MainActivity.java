@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.weimont.ecommerceandroid.Adapters.PlateAdapter;
+import com.weimont.ecommerceandroid.EmailLoginRegister.EmailLoginActivity;
+import com.weimont.ecommerceandroid.EmailLoginRegister.EmailRegisterActivity;
 import com.weimont.ecommerceandroid.Model.PlateModel;
 
 import java.util.ArrayList;
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
+    private LinearLayout emailContinue;
+    private LinearLayout emailContinueBtn;
 
 
     @Override
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //////////// Status bar hide end //////////////////////////////
+
+
+        emailContinue = findViewById(R.id.linear2);
 
 
         //////////// Inicio Imagen en pasarela //////////////////////////////
@@ -63,11 +73,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(plateAdapter);;
         plateAdapter.notifyDataSetChanged();
 
-        // llamar a autoscroll
+        //////////  inicio imagen en Pasarella //////////////
         autoScroll();
+        /////////// fin imagen en Pasarella //////////////
+
+        /////////////// inicio continuar con email ////////////////////////////////////
+        emailContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EmailLoginActivity.class);
+                startActivity(intent);
+                Animatoo.animateSlideDown(MainActivity.this);
+            }
+        });
+        /////////////// fin continuar con email ////////////////////////////////////
 
     }
 
+    //////////// inicio Imagen en pasarela //////////////////////////////
     public void autoScroll(){
         // default speedScroll is 0
         final int speedScroll = 4;
