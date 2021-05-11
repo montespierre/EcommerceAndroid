@@ -18,6 +18,7 @@ import com.weimont.ecommerceandroid.Adapters.PlateAdapter;
 import com.weimont.ecommerceandroid.EmailLoginRegister.EmailLoginActivity;
 import com.weimont.ecommerceandroid.EmailLoginRegister.EmailRegisterActivity;
 import com.weimont.ecommerceandroid.Model.PlateModel;
+import com.weimont.ecommerceandroid.PhoneLoginRegister.PhoneLoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
-    private LinearLayout emailContinue;
-    private LinearLayout emailContinueBtn;
+    private LinearLayout emailContinue, phoneContinue;
+
+
 
 
     @Override
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         emailContinue = findViewById(R.id.linear2);
+        phoneContinue = findViewById(R.id.linear1);
 
 
         //////////// Inicio Imagen en pasarela //////////////////////////////
@@ -87,6 +90,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /////////////// fin continuar con email ////////////////////////////////////
+
+        /////////////// inicio continuar con phone ////////////////////////////////////
+        phoneContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PhoneLoginActivity.class);
+                startActivity(intent);
+                Animatoo.animateSlideDown(MainActivity.this);
+            }
+        });
+        /////////////// fin continuar con phone ////////////////////////////////////
 
     }
 

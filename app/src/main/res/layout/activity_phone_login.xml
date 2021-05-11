@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmailLoginRegister.EmailLoginActivity">
+    tools:context=".PhoneLoginRegister.PhoneLoginActivity">
 
 
     <RelativeLayout
@@ -33,12 +33,15 @@
         app:layout_constraintTop_toTopOf="@+id/relativeLayout">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Sign in"
+            android:drawableTint="@color/colorAccent"
+            android:drawablePadding="16dp"
+            android:drawableLeft="@drawable/phone_icon"
             android:textColor="@color/colorAccent"
             android:textSize="30sp" />
 
@@ -63,27 +66,15 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:drawableLeft="@drawable/email_icon"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/colorAccent"
+            android:background="@drawable/sklip_button"
             android:elevation="20dp"
-            android:hint="Email:"
-            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:hint="Numero Telefonico"
+            android:inputType="number"
+            android:maxLength="9"
             android:padding="16dp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:drawableLeft="@drawable/password_icon"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/colorAccent"
-            android:elevation="20dp"
-            android:hint="Password:"
-            android:inputType="textPassword"
-            android:padding="16dp" />
+
         <TextView
             android:onClick="goToRegister"
             android:layout_width="match_parent"
@@ -94,8 +85,8 @@
             android:textColor="@color/colorAccent"
             android:gravity="right"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="8dp"
             />
 
 
