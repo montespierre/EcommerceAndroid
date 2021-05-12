@@ -14,8 +14,18 @@
         android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:onClick="backToMainPage"
+            android:id="@+id/imageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/back_button_icon" />
 
     </RelativeLayout>
 

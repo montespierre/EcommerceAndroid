@@ -10,6 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.weimont.ecommerceandroid.EmailLoginRegister.EmailLoginActivity;
+import com.weimont.ecommerceandroid.MainActivity;
 import com.weimont.ecommerceandroid.R;
 
 public class PhoneRegisterActivity extends AppCompatActivity {
@@ -31,6 +33,14 @@ public class PhoneRegisterActivity extends AppCompatActivity {
     public void goToLogin(View view) {
 
         Intent intent = new Intent(PhoneRegisterActivity.this, PhoneLoginActivity.class);
+        startActivity(intent);
+        Animatoo.animateSwipeLeft(this);
+        finish();
+    }
+
+    public void backToMainPage(View view) {
+
+        Intent intent = new Intent(PhoneRegisterActivity.this, MainActivity.class);
         startActivity(intent);
         Animatoo.animateSwipeLeft(this);
         finish();
