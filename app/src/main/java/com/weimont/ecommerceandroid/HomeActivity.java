@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    //////////////////////////// Select Fragment /////////////////////////////
+    //////////////////////////// inicio Select Fragment /////////////////////////////
     private BottomNavigationView.OnNavigationItemSelectedListener navigation =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -87,4 +87,5 @@ public class HomeActivity extends AppCompatActivity {
 
                 }
             };
+    //////////////////////////// fin Select Fragment /////////////////////////////
 }
