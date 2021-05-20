@@ -47,4 +47,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     // Animatoo is a lightweight and easy to use Android library that provides many activity transition animations
     implementation 'com.github.mohammadatif:Animatoo:master'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
 }

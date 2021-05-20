@@ -16,13 +16,21 @@ import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.weimont.ecommerceandroid.MainActivity;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiClient;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiInterface;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.Users;
 import com.weimont.ecommerceandroid.PhoneLoginRegister.PhoneRegisterActivity;
 import com.weimont.ecommerceandroid.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EmailRegisterActivity extends AppCompatActivity {
 
     private EditText name, email, password;
     private Button regBtn;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
 
         }
         //////////// Status bar hide end //////////////////////////////
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         init();
 
@@ -96,7 +105,27 @@ public class EmailRegisterActivity extends AppCompatActivity {
             }).start();
             dialog.show();
 
-            Toast.makeText(EmailRegisterActivity.this, "Success", Toast.LENGTH_SHORT).show();
+            Call<Users> call = apiInterface.performEmailRegistration(user_name, user_email, user_password);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+                    if(response.body().getResponse().equals("ok")){
+                        Toast.makeText(EmailRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else if(response.body().getResponse().equals("failed")){
+                        Toast.makeText(EmailRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else if(response.body().getResponse().equals("already")){
+                        Toast.makeText(EmailRegisterActivity.this, "Este email ya existe. Ingrese otro", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+
+                }
+            });
         }
     }
 
