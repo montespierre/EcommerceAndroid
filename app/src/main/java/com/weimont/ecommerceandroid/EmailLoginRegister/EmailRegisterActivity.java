@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -68,9 +69,13 @@ public class EmailRegisterActivity extends AppCompatActivity {
     private void registrar() {
 
 
-        String user_name = name.getText().toString().trim();
-        String user_email = email.getText().toString().trim();
-        String user_password = password.getText().toString().trim();
+        //String user_name = name.getText().toString().trim();
+        //String user_email = email.getText().toString().trim();
+        //String user_password = password.getText().toString().trim();
+
+        String user_name = "pepa";
+        String user_email = "pepa@pepa";
+        String user_password = "2322715";
 
         if(TextUtils.isEmpty(user_name)){
             name.setError("name is required");
@@ -109,20 +114,34 @@ public class EmailRegisterActivity extends AppCompatActivity {
             call.enqueue(new Callback<Users>() {
                 @Override
                 public void onResponse(Call<Users> call, Response<Users> response) {
-                    if(response.body().getResponse().equals("ok")){
-                        Toast.makeText(EmailRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }else if(response.body().getResponse().equals("failed")){
-                        Toast.makeText(EmailRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }else if(response.body().getResponse().equals("already")){
-                        Toast.makeText(EmailRegisterActivity.this, "Este email ya existe. Ingrese otro", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+
+                    if(!response.isSuccessful()){
+
+                        Log.e("callService.onResponse", "Error" + response.code());
+
+                    } else {
+
+                        if(response.body().getResponse().equals("ok")){
+                            Toast.makeText(EmailRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else if(response.body().getResponse().equals("failed")){
+                            Toast.makeText(EmailRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }else if(response.body().getResponse().equals("already")){
+                            Toast.makeText(EmailRegisterActivity.this, "Este email ya existe. Ingrese otro", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+
                     }
+
+
+
                 }
 
                 @Override
                 public void onFailure(Call<Users> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Login Failed", Toast.LENGTH_LONG).show();
+                    Log.e("CallService.onfailure", t.getLocalizedMessage());
 
                 }
             });
