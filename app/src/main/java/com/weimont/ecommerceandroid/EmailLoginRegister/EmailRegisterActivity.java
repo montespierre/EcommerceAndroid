@@ -69,13 +69,13 @@ public class EmailRegisterActivity extends AppCompatActivity {
     private void registrar() {
 
 
-        //String user_name = name.getText().toString().trim();
-        //String user_email = email.getText().toString().trim();
-        //String user_password = password.getText().toString().trim();
+        String user_name = name.getText().toString().trim();
+        String user_email = email.getText().toString().trim();
+        String user_password = password.getText().toString().trim();
 
-        String user_name = "joel";
-        String user_email = "joel@gonhi";
-        String user_password = "joel";
+        //String user_name = "joel";
+        //String user_email = "joel@gonhi";
+        //String user_password = "joel";
 
         if(TextUtils.isEmpty(user_name)){
             name.setError("name is required");
