@@ -73,9 +73,9 @@ public class EmailRegisterActivity extends AppCompatActivity {
         //String user_email = email.getText().toString().trim();
         //String user_password = password.getText().toString().trim();
 
-        String user_name = "pepa";
-        String user_email = "pepa@pepa";
-        String user_password = "2322715";
+        String user_name = "joel";
+        String user_email = "joel@gonhi";
+        String user_password = "joel";
 
         if(TextUtils.isEmpty(user_name)){
             name.setError("name is required");
