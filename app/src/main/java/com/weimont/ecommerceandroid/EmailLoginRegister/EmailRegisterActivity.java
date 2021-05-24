@@ -84,6 +84,8 @@ public class EmailRegisterActivity extends AppCompatActivity {
         }else if(TextUtils.isEmpty(user_password)){
             password.setText("password is required");
         }else{
+
+            ///// inicio progress bar //////
             ProgressDialog dialog = new ProgressDialog(this);
             dialog.setTitle("Registrando...");
             dialog.setMessage("Espere escribimos tus credenciales");
@@ -109,6 +111,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
                 }
             }).start();
             dialog.show();
+            ///// fin progress bar //////
 
             Call<Users> call = apiInterface.performEmailRegistration(user_name, user_email, user_password);
             call.enqueue(new Callback<Users>() {

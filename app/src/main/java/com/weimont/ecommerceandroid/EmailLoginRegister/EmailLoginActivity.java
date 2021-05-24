@@ -16,14 +16,22 @@ import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.weimont.ecommerceandroid.MainActivity;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiClient;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiInterface;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.Users;
 import com.weimont.ecommerceandroid.R;
 
 import java.util.concurrent.RunnableFuture;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EmailLoginActivity extends AppCompatActivity {
 
     private EditText email, password;
     private Button btnLogin;
+    public static ApiInterface apiInterface;
 
 
     @Override
@@ -38,6 +46,7 @@ public class EmailLoginActivity extends AppCompatActivity {
 
         }
         //////////// Status bar hide end //////////////////////////////
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         init();
 
@@ -68,11 +77,12 @@ public class EmailLoginActivity extends AppCompatActivity {
         String user_password = password.getText().toString().trim();
 
         if(TextUtils.isEmpty((user_email))){
-            email.setError("email requeerido");
+            email.setError("email requerido");
         }else if(TextUtils.isEmpty(user_password)){
             password.setError("Password es requerida");
         }else{
 
+            ///// inicio progress bar //////
             ProgressDialog dialog = new ProgressDialog(this);
             dialog.setTitle("Registrando...");
             dialog.setMessage("Espere escribimos tus credenciales");
@@ -98,8 +108,31 @@ public class EmailLoginActivity extends AppCompatActivity {
                 }
             }).start();
             dialog.show();
+            ///// fin progress bar //////
 
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            Call<Users> call = apiInterface.performEmailLogin(user_email, user_password);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+                    String user_id = response.body().getUserId();
+
+                    if(response.body().getResponse().equals("ok")){
+                        Toast.makeText(EmailLoginActivity.this, user_id, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EmailLoginActivity.this, "Loggin satisfactorio", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }else if(response.body().getResponse().equals("no_account")){
+                        Toast.makeText(EmailLoginActivity.this, "email o contrasenha incorrecta", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+
+                }
+            });
         }
     }
 
