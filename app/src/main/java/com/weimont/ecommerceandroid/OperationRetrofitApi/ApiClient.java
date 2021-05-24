@@ -7,6 +7,7 @@ public class ApiClient {
 
     //public static final String BASE_URL = "http://localhost/libfio/users/";
     // public static final String BASE_URL = "http://127.0.0.1:80/libfio/users/";
+    // Cada vez que ingrese a local host se usa la ip de ipconfig para que retrofit la reconozca
     public static final String BASE_URL = "http://" + "192.168.43.40" + "/libfio/users/";
     public static Retrofit retrofit = null;
 
