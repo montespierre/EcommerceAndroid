@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,12 +17,20 @@ import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.weimont.ecommerceandroid.MainActivity;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiClient;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiInterface;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.Users;
 import com.weimont.ecommerceandroid.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PhoneLoginActivity extends AppCompatActivity {
 
     private EditText phone;
     private Button btnLogin;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
         }
         //////////// Status bar hide end //////////////////////////////
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         init();
     }
@@ -60,6 +70,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
             phone.setError("Phone es requerido");
 
         }else{
+
+            //////////////// inicio barraa de progreso ///////////////
             ProgressDialog dialog = new ProgressDialog(this);
             dialog.setTitle("Registrando...");
             dialog.setMessage("Espere escribimos tus credenciales");
@@ -86,7 +98,34 @@ public class PhoneLoginActivity extends AppCompatActivity {
             }).start();
             dialog.show();
 
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            //////////////// fin barraa de progreso ///////////////
+            Call<Users> call = apiInterface.performPhoneLogin(user_phone);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+
+                    if(response.body().getResponse().equals("ok")){
+                        String user_id = response.body().getUserId();
+                        Toast.makeText(PhoneLoginActivity.this, user_id, Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(PhoneLoginActivity.this, "Login satisfactorio", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }else if(response.body().getResponse().equals("no_account")){
+                        Toast.makeText(PhoneLoginActivity.this, "Telefono no existe", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Fallo el login", Toast.LENGTH_LONG).show();
+                    Log.e("CallService.onfailure", t.getLocalizedMessage());
+
+                }
+            });
+
         }
     }
 

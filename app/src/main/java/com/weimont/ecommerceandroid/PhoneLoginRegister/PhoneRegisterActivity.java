@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,13 +17,22 @@ import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.weimont.ecommerceandroid.EmailLoginRegister.EmailLoginActivity;
+import com.weimont.ecommerceandroid.EmailLoginRegister.EmailRegisterActivity;
 import com.weimont.ecommerceandroid.MainActivity;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiClient;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.ApiInterface;
+import com.weimont.ecommerceandroid.OperationRetrofitApi.Users;
 import com.weimont.ecommerceandroid.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PhoneRegisterActivity extends AppCompatActivity {
 
     private EditText phone;
     private Button btnReg;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
 
         }
         //////////// Status bar hide end //////////////////////////////
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         init();
     }
@@ -88,7 +99,31 @@ public class PhoneRegisterActivity extends AppCompatActivity {
             dialog.show();
             //////////////// fin barraa de progreso ///////////////
 
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            Call<Users> call = apiInterface.performPhoneRegistration(user_phone);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+
+                    if(response.body().getResponse().equals("ok")){
+                        Toast.makeText(PhoneRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else if(response.body().getResponse().equals("failed")){
+                        Toast.makeText(PhoneRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else if(response.body().getResponse().equals("already")){
+                        Toast.makeText(PhoneRegisterActivity.this, "Este telefono ya existe. Ingrese otro", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Fallo el registro", Toast.LENGTH_LONG).show();
+                    Log.e("CallService.onfailure", t.getLocalizedMessage());
+
+                }
+            });
         }
     }
 

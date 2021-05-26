@@ -143,7 +143,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Users> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Login Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Registro fallo", Toast.LENGTH_LONG).show();
                     Log.e("CallService.onfailure", t.getLocalizedMessage());
 
                 }
