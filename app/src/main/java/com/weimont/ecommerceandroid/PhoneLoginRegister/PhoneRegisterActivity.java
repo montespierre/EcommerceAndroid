@@ -33,6 +33,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
     private EditText phone;
     private Button btnReg;
     public static ApiInterface apiInterface;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,10 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                 public void onResponse(Call<Users> call, Response<Users> response) {
 
                     if(response.body().getResponse().equals("ok")){
-                        Toast.makeText(PhoneRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
+
+                        user_id = response.body().getUserId();
+
+                        Toast.makeText(PhoneRegisterActivity.this, user_id, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }else if(response.body().getResponse().equals("failed")){
                         Toast.makeText(PhoneRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();
