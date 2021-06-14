@@ -28,8 +28,8 @@ import retrofit2.Response;
 
 public class PhoneLoginActivity extends AppCompatActivity {
 
-    private EditText phone;
-    private Button btnLogin;
+    private EditText phone, otp;
+    private Button btnLogin, btnOtp;
     public static ApiInterface apiInterface;
     String user_id;
 
@@ -53,12 +53,27 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private void init() {
 
         phone = (EditText) findViewById(R.id.phone);
+        otp = (EditText) findViewById(R.id.otp);
+        btnOtp = (Button) findViewById(R.id.button3);
         btnLogin = (Button) findViewById(R.id.button2);
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        btnOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(otp.getText().toString().equals("")){
+                    Toast.makeText(PhoneLoginActivity.this, "Ingrese sus 6 digitos OTP", Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                }
             }
         });
     }

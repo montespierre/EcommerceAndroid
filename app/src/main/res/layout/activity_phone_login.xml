@@ -86,6 +86,22 @@
             android:maxLength="9"
             android:padding="16dp" />
 
+        <EditText
+            android:id="@+id/otp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/sklip_button"
+            android:elevation="20dp"
+            android:textAlignment="center"
+            android:hint="otp"
+            android:visibility="gone"
+            android:inputType="number"
+            android:maxLength="6"
+            android:padding="16dp" />
+
 
         <TextView
             android:onClick="goToRegister"
@@ -98,7 +114,7 @@
             android:gravity="right"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             />
 
 
@@ -116,6 +132,24 @@
         android:drawableTint="@color/colorWhite"
         android:text="Continue"
         android:elevation="20dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:background="@color/colorAccent"
+        android:drawableRight="@drawable/rigth_arrow"
+        android:drawableTint="@color/colorWhite"
+        android:text="Enviar otp"
+        android:elevation="20dp"
+        android:visibility="gone"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
