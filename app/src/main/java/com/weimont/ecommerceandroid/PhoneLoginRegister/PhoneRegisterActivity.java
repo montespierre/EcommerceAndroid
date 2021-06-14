@@ -109,7 +109,8 @@ public class PhoneRegisterActivity extends AppCompatActivity {
 
                         user_id = response.body().getUserId();
 
-                        Toast.makeText(PhoneRegisterActivity.this, user_id, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(PhoneRegisterActivity.this, user_id, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PhoneRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }else if(response.body().getResponse().equals("failed")){
                         Toast.makeText(PhoneRegisterActivity.this, "Algo salio mal. Intentalo de nuevo", Toast.LENGTH_SHORT).show();

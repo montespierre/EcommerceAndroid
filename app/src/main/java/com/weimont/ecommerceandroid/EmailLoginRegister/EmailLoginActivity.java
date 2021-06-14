@@ -32,6 +32,7 @@ public class EmailLoginActivity extends AppCompatActivity {
     private EditText email, password;
     private Button btnLogin;
     public static ApiInterface apiInterface;
+    String user_id;
 
 
     @Override
@@ -114,7 +115,7 @@ public class EmailLoginActivity extends AppCompatActivity {
             call.enqueue(new Callback<Users>() {
                 @Override
                 public void onResponse(Call<Users> call, Response<Users> response) {
-                    String user_id = response.body().getUserId();
+                    user_id = response.body().getUserId();
 
                     if(response.body().getResponse().equals("ok")){
                         Toast.makeText(EmailLoginActivity.this, user_id, Toast.LENGTH_SHORT).show();

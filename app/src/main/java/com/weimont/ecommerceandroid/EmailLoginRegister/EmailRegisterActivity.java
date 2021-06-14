@@ -32,6 +32,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
     private EditText name, email, password;
     private Button regBtn;
     public static ApiInterface apiInterface;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,10 @@ public class EmailRegisterActivity extends AppCompatActivity {
                     } else {
 
                         if(response.body().getResponse().equals("ok")){
+                            user_id = response.body().getUserId();
+
+                            // Toast.makeText(EmailRegisterActivity.this, user_id, Toast.LENGTH_SHORT).show();
+
                             Toast.makeText(EmailRegisterActivity.this, "Cuenta creada satisfactoraimente", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }else if(response.body().getResponse().equals("failed")){

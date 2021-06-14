@@ -31,6 +31,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private EditText phone;
     private Button btnLogin;
     public static ApiInterface apiInterface;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 public void onResponse(Call<Users> call, Response<Users> response) {
 
                     if(response.body().getResponse().equals("ok")){
-                        String user_id = response.body().getUserId();
+                        user_id = response.body().getUserId();
                         Toast.makeText(PhoneLoginActivity.this, user_id, Toast.LENGTH_SHORT).show();
 
                         Toast.makeText(PhoneLoginActivity.this, "Login satisfactorio", Toast.LENGTH_SHORT).show();
